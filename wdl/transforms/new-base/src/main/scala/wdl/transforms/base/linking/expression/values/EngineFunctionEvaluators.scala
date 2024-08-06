@@ -50,10 +50,11 @@ object EngineFunctionEvaluators {
       EvaluatedValue(WomSingleFile(ioFunctionSet.pathFunctions.stderr), Seq.empty).validNel
   }
 
-  private val ReadWaitTimeout = 60.seconds
-  private def readFile(fileToRead: WomSingleFile, ioFunctionSet: IoFunctionSet, sizeLimit: Int) = {
-    Try(Await.result(ioFunctionSet.readFile(fileToRead.value, Option(sizeLimit), failOnOverflow = true), ReadWaitTimeout))
-  }
+  private val ReadWaitTimeout = 10.minutes
+  private def readFile(fileToRead: WomSingleFile, ioFunctionSet: IoFunctionSet, sizeLimit: Int) =
+    Try(
+      Await.result(ioFunctionSet.readFile(fileToRead.value, Option(sizeLimit), failOnOverflow = true), ReadWaitTimeout)
+    )
 
   implicit val readLinesFunctionEvaluator: ValueEvaluator[ReadLines] = new ValueEvaluator[ReadLines] {
     override def evaluateValue(a: ReadLines,
