@@ -1,6 +1,5 @@
 import ContinuousIntegration._
 import Dependencies._
-import GenerateRestApiDocs._
 import Merging.customMergeStrategy
 import Publishing._
 import Testing._
@@ -188,7 +187,6 @@ object Settings {
         _
           .disablePlugins(AssemblyPlugin)
           .settings(publish := {})
-          .settings(generateRestApiDocsSettings)
           .settings(ciSettings)
           .settings(rootArtifactorySettings)
       )
