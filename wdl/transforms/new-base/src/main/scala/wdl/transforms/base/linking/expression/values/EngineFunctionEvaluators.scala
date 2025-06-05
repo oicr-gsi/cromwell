@@ -50,7 +50,7 @@ object EngineFunctionEvaluators {
       EvaluatedValue(WomSingleFile(ioFunctionSet.pathFunctions.stderr), Seq.empty).validNel
   }
 
-  private val ReadWaitTimeout = 10.minutes
+  private val ReadWaitTimeout = Duration.Inf
   private def readFile(fileToRead: WomSingleFile, ioFunctionSet: IoFunctionSet, sizeLimit: Int) =
     Try(
       Await.result(ioFunctionSet.readFile(fileToRead.value, Option(sizeLimit), failOnOverflow = true), ReadWaitTimeout)
